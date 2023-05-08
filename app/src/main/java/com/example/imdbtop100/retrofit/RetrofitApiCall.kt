@@ -1,5 +1,6 @@
 package com.example.imdbtop100.retrofit
 
+import com.example.imdbtop100.model.MoviesResponseEntity
 import org.json.JSONObject
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -11,7 +12,7 @@ interface RetrofitApiCall {
         "X-RapidAPI-Host:imdb-top-100-movies.p.rapidapi.com"
     )
     @GET("/")
-    suspend fun getTop100Movies(): JSONObject
+    suspend fun getTop100Movies(): List<MoviesResponseEntity>
 
 
 }
