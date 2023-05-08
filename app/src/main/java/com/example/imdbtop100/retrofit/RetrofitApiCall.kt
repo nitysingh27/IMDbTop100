@@ -7,10 +7,8 @@ import retrofit2.http.Query
 
 interface RetrofitApiCall {
     @Headers(
-        "X-RapidAPI-Key",
-        "c1013262aamsh706a8f67b1e6ad3p1b4a90jsn936f9e42cf9a",
-        "X-RapidAPI-Host",
-        "imdb-top-100-movies.p.rapidapi.com"
+        "X-RapidAPI-Key:c1013262aamsh706a8f67b1e6ad3p1b4a90jsn936f9e42cf9a",
+        "X-RapidAPI-Host:imdb-top-100-movies.p.rapidapi.com"
     )
     @GET("/")
     suspend fun getTop100Movies(): JSONObject

@@ -27,6 +27,7 @@ class TopMoviesFragment : Fragment() {
         viewModel.liveDataResponse.observe(viewLifecycleOwner) {
             Log.d(TAG, "onCreateView livedataResponse: ${it.toString()}")
         }
+        viewModel.getTopMovies()
         return binding?.root
     }
 }
