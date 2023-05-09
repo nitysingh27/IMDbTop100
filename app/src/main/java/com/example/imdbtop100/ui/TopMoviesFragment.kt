@@ -32,7 +32,7 @@ class TopMoviesFragment : Fragment() {
         viewModel.liveDataResponse.observe(viewLifecycleOwner) {
             Log.d(TAG, "onCreateView livedataResponse: ${it.toString()}")
         }
-        viewModel.getTopMovies()
+        //viewModel.getTopMovies()
         val itemAdapter = Adapter(viewModel.liveDataResponse.value?:ArrayList())
 
 
