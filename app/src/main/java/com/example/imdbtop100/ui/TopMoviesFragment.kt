@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TopMoviesFragment : Fragment() {
     private val viewModel : TopMoviesViewModel by viewModels()
     var binding : FragmentTopMoviesBinding?=null
+    lateinit var mAdapter: Adapter
 
 
     override fun onCreateView(
@@ -32,22 +33,20 @@ class TopMoviesFragment : Fragment() {
             Log.d(TAG, "onCreateView livedataResponse: ${it.toString()}")
         }
         viewModel.getTopMovies()
-        return binding?.root
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        // Assign responseList to ItemAdapter
         val itemAdapter = Adapter(viewModel.liveDataResponse.value?:ArrayList())
+
 
         // Set the LayoutManager that
         // this RecyclerView will use.
-        val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val recyclerView: RecyclerView? =view?.findViewById(R.id.recycleView)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
 
         // adapter instance is set to the
         // recyclerview to inflate the items.
-        recyclerView.adapter = itemAdapter
+        recyclerView?.adapter = itemAdapter
+        itemAdapter.notifyDataSetChanged()
+
+        return binding?.root
     }
+
 }

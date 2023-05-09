@@ -16,11 +16,12 @@ class TopMoviesViewModel @Inject constructor(
      var top100MoviesRepository: Top100MoviesRepository
 ) : ViewModel() {
     var liveDataResponse : MutableLiveData<List<MoviesResponseEntity>> = MutableLiveData()
-    fun getTopMovies(){
+    fun getTopMovies() : MutableLiveData<List<MoviesResponseEntity>>{
         viewModelScope.launch(Dispatchers.IO) {
             var response = top100MoviesRepository.getTop100Movies()
             liveDataResponse.postValue(response)
 
         }
+        return liveDataResponse
     }
 }
