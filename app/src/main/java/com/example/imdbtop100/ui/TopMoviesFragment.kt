@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.imdbtop100.R
 import com.example.imdbtop100.databinding.FragmentTopMoviesBinding
+import com.example.imdbtop100.model.MoviesResponseEntity
 import com.example.imdbtop100.viewmodel.TopMoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TopMoviesFragment : Fragment() {
     private val viewModel : TopMoviesViewModel by viewModels()
     var binding : FragmentTopMoviesBinding?=null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,5 +33,21 @@ class TopMoviesFragment : Fragment() {
         }
         viewModel.getTopMovies()
         return binding?.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        // Assign responseList to ItemAdapter
+        val itemAdapter = Adapter(viewModel.liveDataResponse.value?:ArrayList())
+
+        // Set the LayoutManager that
+        // this RecyclerView will use.
+        val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        // adapter instance is set to the
+        // recyclerview to inflate the items.
+        recyclerView.adapter = itemAdapter
     }
 }
