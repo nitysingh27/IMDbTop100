@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun displayTop100Movies()
     {
-        binding?.mainActivity?.visibility = View.GONE
-        binding?.container?.visibility = View.VISIBLE
+        binding.mainActivity.visibility = View.GONE
+        binding.container.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction().replace(R.id.container, TopMoviesFragment())
             .commit()
 
