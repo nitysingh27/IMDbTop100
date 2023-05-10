@@ -39,7 +39,6 @@ class TopMoviesFragment : Fragment() {
         // this RecyclerView will use.
         val recyclerView: RecyclerView? = binding?.recycleView
         recyclerView?.layoutManager = LinearLayoutManager(context)
-
         // adapter instance is set to the
         // recyclerview to inflate the items.
         recyclerView?.adapter = itemAdapter
