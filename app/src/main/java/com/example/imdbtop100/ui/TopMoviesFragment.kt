@@ -19,32 +19,30 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TopMoviesFragment : Fragment() {
-    private val viewModel : TopMoviesViewModel by viewModels()
-    var binding : FragmentTopMoviesBinding?=null
-    lateinit var mAdapter: Adapter
+    private val viewModel: TopMoviesViewModel by viewModels()
+    var binding: FragmentTopMoviesBinding? = null
+    var itemAdapter: Adapter? = null
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_top_movies,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_top_movies, container, false)
         viewModel.liveDataResponse.observe(viewLifecycleOwner) {
             Log.d(TAG, "onCreateView livedataResponse: ${it.toString()}")
+            itemAdapter?.update(it as ArrayList<MoviesResponseEntity>)
         }
-        //viewModel.getTopMovies()
-        val itemAdapter = Adapter(viewModel.liveDataResponse.value?:ArrayList())
-
-
+        viewModel.getTopMovies()
+        itemAdapter = Adapter(ArrayList())
         // Set the LayoutManager that
         // this RecyclerView will use.
-        val recyclerView: RecyclerView? =view?.findViewById(R.id.recycleView)
+        val recyclerView: RecyclerView? = binding?.recycleView
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
         // adapter instance is set to the
         // recyclerview to inflate the items.
         recyclerView?.adapter = itemAdapter
-        itemAdapter.notifyDataSetChanged()
 
         return binding?.root
     }

@@ -8,11 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.imdbtop100.R
 import com.example.imdbtop100.model.MoviesResponseEntity
 
- class Adapter ( private val responseList :List<MoviesResponseEntity>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
+ class Adapter ( private val responseList :ArrayList<MoviesResponseEntity>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         // Inflate the layout for each item and return a new ViewHolder object
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_items, parent, false)
         return MyViewHolder(itemView)
+    }
+
+    fun update(list: ArrayList<MoviesResponseEntity>) {
+        responseList.clear()
+        responseList.addAll(list)
+        this.notifyDataSetChanged()
     }
 
     // This method returns the total
