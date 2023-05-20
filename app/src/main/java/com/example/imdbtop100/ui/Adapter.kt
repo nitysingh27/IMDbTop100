@@ -31,13 +31,14 @@ import com.example.imdbtop100.model.MoviesResponseEntity
     // for each item in the RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position : Int) {
         val movieList = responseList[position]
-        holder.movieName.text = movieList.title
-        holder.movieRating.text = movieList.rating
+        holder.movieName.text = "static data "
+        holder.movieRating.text = "static rating"
 
     }
 
     // This class defines the ViewHolder object for each item in the RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val movieName: TextView = itemView.findViewById(R.id.movie_name)
         val movieRating: TextView = itemView.findViewById(R.id.movie_rating)
     }
